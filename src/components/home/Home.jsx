@@ -8,7 +8,8 @@ export default function Home() {
 
   return (
     <>
-       <Buscador/>       
+       <Buscador/>
+              
       {categories.map((categorie, index) => {
         return <li key={index}>{categorie}</li>;
       })}

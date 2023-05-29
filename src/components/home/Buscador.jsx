@@ -6,12 +6,16 @@ export default function Buscador() {
     const addInputValue = (e)=>{
         setInputValue(e.target.value);
     }
-    console.log(inputValue);
+
+    const eventSubmit = (e)=> {
+        e.preventDefault()
+        console.log(inputValue);
+    }
+
     return(
-        <>  
-            <h1>Buscador de Gif</h1>
-            <input type="text" value={inputValue} onChange={addInputValue} />
-        </>
+            <form onSubmit={(e)=>eventSubmit(e)}>
+                <input type="text" value={inputValue} onChange={addInputValue} />
+            </form>
     );
 
 }
