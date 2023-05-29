@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Buscador() {
+export default function Buscador(props) {
     const [inputValue, setInputValue] = useState("");
 
     const addInputValue = (e)=>{
@@ -9,12 +9,20 @@ export default function Buscador() {
 
     const eventSubmit = (e)=> {
         e.preventDefault()
-        console.log(inputValue);
+
+        if(inputValue.trim().length <=1) return;
+
+        //enviar a la props un valor como parametro
+        props.addCategory(inputValue);
+
+        //permite resetear el campus
+        setInputValue("");
     }
+   
 
     return(
             <form onSubmit={(e)=>eventSubmit(e)}>
-                <input type="text" value={inputValue} onChange={addInputValue} />
+                <input type="text" value={inputValue} onChange={addInputValue}/>
             </form>
     );
 

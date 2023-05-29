@@ -2,16 +2,27 @@ import {useState } from "react";
 import Buscador from "./Buscador";
 
 export default function Home() {
-  const [categories, setCategories] = useState(["hola"]);
+  const [categories, setCategories] = useState([]);
 
   console.log(categories);
 
+  const addCategory = (category) => {
+
+    //si la categoria existe en el estado no la agrega de lo contrario si.
+    if(categories.includes(category))return;
+
+    //guarda el valor recibido de buscador, y lo añade al estado de categorias.
+
+    setCategories((prevCategory)=>[...prevCategory, category]);
+
+  }
+
   return (
     <>
-       <Buscador/>
-              
-      {categories.map((categorie, index) => {
-        return <li key={index}>{categorie}</li>;
+       <Buscador addCategory={addCategory}/>
+
+      {categories.map((categorie) => {
+        return <li key={categorie}> {categorie} </li>;
       })}
     </>
   );
