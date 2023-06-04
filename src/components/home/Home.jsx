@@ -1,6 +1,6 @@
 import {useState } from "react";
 import Buscador from "./Buscador";
-
+import GifCategory from "./GifCategory";
 export default function Home() {
   const [categories, setCategories] = useState([]);
 
@@ -22,7 +22,8 @@ export default function Home() {
        <Buscador addCategory={addCategory}/>
 
       {categories.map((categorie) => {
-        return <li key={categorie}> {categorie} </li>;
+
+        return <GifCategory key={categorie} categorie={categorie}/>
       })}
     </>
   );
