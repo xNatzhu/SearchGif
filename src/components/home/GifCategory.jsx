@@ -26,16 +26,16 @@ export default function GifCategory({categorie, background}){
 
     return(
 
-    <div className={`divide-y divide-solid ${background} p-[10px]`}>
-        <h2 className="uppercase text-[35px] font-bold border-left-2 m-2">{categorie}</h2>
+    <div className={`divide-y divide-solid ${background} sm:px-[100px] p-[10px]`}>
+        <h2 className="uppercase text-[35px] text-[#161616] font-bold border-left-2 m-2">{categorie}</h2>
 
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap pt-[30px]">
             {listGif.map((gif, index) => (
-                <div key={index} className="bg-[#fff] w-[200px] h-[200px] m-2">
-                <p className="absolute bg-[#161616] text-[#fff] border rounded-lg px-5 uppercase">
+                <div key={index} className="w-[200px] h-[200px] m-2">
+                <p className="absolute bg-[#161616] text-[#fff] rounded-full px-3 uppercase">
                     {gif.type}
                 </p>
-                <img src={gif.images.original.url} className="w-full h-full object-cover" />
+                <img src={gif.images.original.url} className="w-full h-full object-cover rounded-lg" />
                 </div>
             ))}
         </div>

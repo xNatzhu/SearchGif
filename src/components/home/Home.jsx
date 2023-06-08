@@ -20,26 +20,25 @@ export default function Home() {
   return (
     <>
 
-      <div className="flex flex-col">
-        <div className="flex flex-col sm:flex-col pt-[50px] px-[15px] pb-[50px] bg-cover bg-center sm:px-[100px]" style={{ backgroundImage: "url('/img/background.jpg')" }}>
-          <div className="w-[100%] sm:w-[700px] ">
-            <h1 className="text-[60px] text-[#fff] uppercase font-bold mb-[30px]"> GIF Search</h1>
-            <p className="mb-[30px]">Explora y descarga contenido visual de manera rápida y sencilla en nuestra plataforma. Encuentra la mejor selección de GIFs, imágenes y stickers para complementar tu contenido.</p>
-          
-          </div>  
+      <div className="bg-gray-900 text-white py-20 ">
+        <div className="container mx-auto text-center">
+        <h1
+        className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl"
+      >
+        Search Gif
+      </h1>
+          <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed mb-[30px]">Explora y descarga contenido visual de manera rápida y sencilla en nuestra plataforma. Encuentra la mejor selección de GIFs, imágenes y stickers para complementar tu contenido.</p>
           <Buscador addCategory={addCategory}/>
-        </div>  
-
-          <div className="sm:px-[100px]">
-            {categories.map((categorie, index) => {
-              const bgColor = index % 2 === 0 ? '' : 'bg-[#161616]';
-              return( 
-                  <GifCategory key={categorie} categorie={categorie} background={bgColor}/>
-              )
-            })}
-          </div>
-
+        </div>
       </div>
+        <div>
+          {categories.map((categorie, index) => {
+            const bgColor = index % 2 === 0 ? 'bg-[#ffffff]' : 'bg-[#f6f5f3]';
+            return( 
+                <GifCategory key={categorie} categorie={categorie} background={bgColor}/>
+            )
+          })}
+        </div>
     </>
   );
 }
