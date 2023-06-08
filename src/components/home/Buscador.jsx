@@ -22,7 +22,7 @@ export default function Buscador(props) {
 
     return(
             <form onSubmit={(e)=>eventSubmit(e)}>
-                <input type="text" value={inputValue} onChange={addInputValue}/>
+                <input type="text" value={inputValue} onChange={addInputValue} className="py-2 px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-500" />
             </form>
     );
 

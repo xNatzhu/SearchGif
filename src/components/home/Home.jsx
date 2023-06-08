@@ -19,12 +19,27 @@ export default function Home() {
 
   return (
     <>
-       <Buscador addCategory={addCategory}/>
 
-      {categories.map((categorie) => {
+      <div className="flex flex-col">
+        <div className="flex flex-col sm:flex-col pt-[50px] px-[15px] pb-[50px] bg-cover bg-center sm:px-[100px]" style={{ backgroundImage: "url('/img/background.jpg')" }}>
+          <div className="w-[100%] sm:w-[700px] ">
+            <h1 className="text-[60px] text-[#fff] uppercase font-bold mb-[30px]"> GIF Search</h1>
+            <p className="mb-[30px]">Explora y descarga contenido visual de manera rápida y sencilla en nuestra plataforma. Encuentra la mejor selección de GIFs, imágenes y stickers para complementar tu contenido.</p>
+          
+          </div>  
+          <Buscador addCategory={addCategory}/>
+        </div>  
 
-        return <GifCategory key={categorie} categorie={categorie}/>
-      })}
+          <div className="sm:px-[100px]">
+            {categories.map((categorie, index) => {
+              const bgColor = index % 2 === 0 ? '' : 'bg-[#161616]';
+              return( 
+                  <GifCategory key={categorie} categorie={categorie} background={bgColor}/>
+              )
+            })}
+          </div>
+
+      </div>
     </>
   );
 }
