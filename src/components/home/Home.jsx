@@ -19,18 +19,22 @@ export default function Home() {
 
   return (
     <>
-
-      <div className="bg-gray-900 text-white py-20 ">
-        <div className="container mx-auto text-center">
-        <h1
-        className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl"
-      >
-        Search Gif
-      </h1>
-          <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed mb-[30px]">Explora y descarga contenido visual de manera rápida y sencilla en nuestra plataforma. Encuentra la mejor selección de GIFs, imágenes y stickers para complementar tu contenido.</p>
-          <Buscador addCategory={addCategory}/>
+        <div className="text-gray-600 bg-gray-200 body-font">
+          <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+            <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+              <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900 font-bold uppercase ">Search Gif</h1>
+              <p className="mb-8 leading-relaxed">Explora y descarga contenido visual de manera rápida y sencilla en nuestra plataforma. Encuentra la mejor selección de GIFs, imágenes y stickers para complementar tu contenido.</p>
+                <Buscador addCategory={addCategory}/>
+              <p className="text-sm mt-2 text-gray-500 mb-8 w-full">Ejemplo: <span className="text-indigo-500">Anime</span> - Obtendrás un resultado basado en el nombre que ingreses.</p>
+              <div className="flex lg:flex-row md:flex-col">
+              </div>
+            </div>
+            {/* <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+              <img className="object-cover object-center rounded" alt="hero" src="720x600" />
+            </div> */}
+          </div>
         </div>
-      </div>
+
         <div>
           {categories.map((categorie, index) => {
             const bgColor = index % 2 === 0 ? 'bg-[#ffffff]' : 'bg-[#f6f5f3]';
