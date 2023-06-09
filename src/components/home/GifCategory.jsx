@@ -31,9 +31,9 @@ export default function GifCategory({categorie, background}){
             <div className="w-24 h-full bg-indigo-500"></div>
         </div>
         <h2 className="uppercase text-[35px] text-gray-500 font-bold border-left-2 m-2">{categorie}</h2>
-
         <div className="flex flex-wrap pt-[30px]">
-            {listGif.map((gif, index) => (
+            { 
+            listGif.map((gif, index) => (
                 <div key={index} className="w-[200px] h-[200px] m-2">
                 <p className="absolute bg-gray-800  m-[2px] text-[#fff] rounded-full px-3 uppercase">
                     {gif.type}
