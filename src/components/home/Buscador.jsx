@@ -22,7 +22,7 @@ export default function Buscador(props) {
 
     return( 
 <div className="flex-row w-full md:justify-start justify-center">
-  <form onSubmit={(e) => eventSubmit(e)} className="relative mr-4 md:w-full lg:w-full xl:w-1/2 w-2/4 flex">
+  <form onSubmit={(e) => eventSubmit(e)} className="relative mr-4 w-full md:w-full lg:w-full xl:w-1/2 w-2/4 flex">
     <input
       type="text"
       value={inputValue}
