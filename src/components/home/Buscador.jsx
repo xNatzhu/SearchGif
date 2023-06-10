@@ -18,11 +18,15 @@ export default function Buscador(props) {
         //permite resetear el campus
         setInputValue("");
     }
-   
 
     return( 
 <div className="flex-row w-full md:justify-start justify-center">
   <form onSubmit={(e) => eventSubmit(e)} className="relative mr-4 w-full md:w-full lg:w-full xl:w-1/2 w-2/4 flex">
+  <select className="inline-flex text-white bg-gray-500 border-0 py-2 px-4 focus:outline-none rounded text-lg">
+        <option className="" value="gif">
+            Gif
+        </option>
+      </select>
     <input
       type="text"
       value={inputValue}

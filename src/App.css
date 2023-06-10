@@ -1,0 +1,7 @@
+select {
+    /* Estilos para ocultar el selector original */
+    appearance: none;
+    -moz-appearance: none; /* Para Firefox */
+    -webkit-appearance: none; /* Para Safari y Chrome */
+
+  }
