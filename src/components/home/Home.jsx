@@ -1,12 +1,12 @@
 import {useState } from "react";
 import Buscador from "./Buscador";
-import GifCategory from "./GifCategory";
+import Category from "./Category";
 import SeccionHome from "./SeccionHome";
 export default function Home() {
   const [categories, setCategories] = useState([]);
+  const [typeCategory, setTypeCategory] = useState("gif"); 
 
-  console.log(categories);
-
+  
   const addCategory = (category) => {
 
     //si la categoria existe en el estado no la agrega de lo contrario si.
@@ -17,12 +17,15 @@ export default function Home() {
     setCategories((prevCategory)=>[...prevCategory, category]);
 
   }
+  
+  const type = (type)=>{
+    setTypeCategory(type)
+    console.log("estado 1", typeCategory);
+  } 
 
   const quitCategory =(category)=>{
-
     //recibe el valor del nombre unico y luego lo filtra creando un nuevo listado
     const listQuitCategory = categories.filter((item)=> item !== category)
-    
     //actualiza el estado
     setCategories(listQuitCategory)
   }
@@ -35,7 +38,7 @@ export default function Home() {
             <h1 className="title-font sm:text-4xl text-3xl mb-4 text-gray-900 font-bold uppercase bg-gradient-to-r from-indigo-600 via-indigo-700 to-indigo-800 text-transparent bg-clip-text">Search Gif</h1>
 
               <p className="mb-8 leading-relaxed">Explora y descarga contenido visual de manera rápida y sencilla en nuestra plataforma. Encuentra la mejor selección de GIFs, imágenes y stickers para complementar tu contenido.</p>
-                <Buscador addCategory={addCategory}/>
+                <Buscador addCategory={addCategory} type={type}/>
               <p className="text-sm mt-2 text-gray-500 mb-8 w-full">Ejemplo: <span className="text-indigo-500">Anime</span> - Obtendrás un resultado basado en el nombre que ingreses.</p>
               <div className="flex lg:flex-row md:flex-col">
               </div>
@@ -52,8 +55,9 @@ export default function Home() {
             :
           categories.map((categorie, index) => {
             const bgColor = index % 2 === 0 ? 'bg-[#ffffff]' : 'bg-[#f6f5f3]';
-            return( 
-                <GifCategory key={categorie} categorie={categorie} quitCategory={quitCategory} background={bgColor}/>
+            return(
+               
+                <Category key={categorie} categorie={categorie} quitCategory={quitCategory} typeCategory={typeCategory} background={bgColor}/>
             )
           })}
         </div>

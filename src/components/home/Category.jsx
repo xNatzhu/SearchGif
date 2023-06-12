@@ -2,31 +2,46 @@ import axios from "axios"
 import Swal from 'sweetalert2'
 import { useState, useEffect } from "react"
 
-export default function GifCategory({categorie, background, quitCategory}){
-
-    const [listGif, setListGif] = useState([])
+export default function Category({categorie, background, quitCategory, typeCategory}){
+    //Listados de los componentes agregados
+    const [listItem, setlistItem] = useState([])
+    //Url personalizada para las peticiones
     const [gifUrl, setGifUrl] = useState(`https://api.giphy.com/v1/gifs/search?api_key=2RtGnE4bNqWnvp3LyrRdh4pmDKb3xlhd&q=${categorie}&limit=10`)
-
-    useEffect(()=>{
-        
-        axios.get(gifUrl) 
-        .then( res => {
-             setListGif(res.data.data)
-             console.log(listGif, "Prueba");
-        })
-        .catch(error=>{
-            Swal({
-                icon:"warning",
-                title: "¡Ups! Hubo un error",
-                text:"Hubo un problema con el servidor, intentelo mas tarde.",
-              });
-        })
+    const [stickerUrl, setStickerUrl] = useState(`https://api.giphy.com/v1/stickers/search?api_key=2RtGnE4bNqWnvp3LyrRdh4pmDKb3xlhd&q=${categorie}&limit=10`)
+    //objeto que conecta las rutas personalizadas por su tipo de categoria
+    const [Url, setUrl] = useState({
+        gif: gifUrl,
+        img: stickerUrl,
+        sticker: stickerUrl
+      });
     
-    },[gifUrl]) //cuando la categoria cambie se aplicara nuevo el renderizado
+      
+    useEffect(()=>{
+        //realizara la peticion dependiendo del tipo de categoria enviada.
+        axios.get(Url[typeCategory]) 
+            .then( res => {
+                if(listItem.length === 0){
+                    return setlistItem(res.data.data)
+                }
+                setlistItem(item => [...item, ...res.data.data])
+                
+            })
+            .catch(error=>{
+                    Swal({
+                        icon:"warning",
+                        title: "¡Ups! Hubo un error",
+                        text:"Hubo un problema con el servidor, intentelo mas tarde.",
+                    });
+                })
+             //cuando la categoria cambie se aplicara nuevo el renderizado
+
+        }
+        ,[typeCategory])
 
     const onEliminar = ()=>{
         quitCategory(categorie)
     }
+
 
     return(
 
@@ -46,7 +61,7 @@ export default function GifCategory({categorie, background, quitCategory}){
         </div>
         <div className="flex flex-wrap pt-[30px]">
             { 
-            listGif.map((gif, index) => (
+            listItem.map((gif, index) => (
                 <div key={index} className="w-[200px] h-[200px] m-2">
                 <p className="absolute bg-gray-800  m-[2px] text-[#fff] rounded-full px-3 uppercase">
                     {gif.type}
