@@ -8,33 +8,63 @@ export default function Category({categorie, background, quitCategory, typeCateg
     //Url personalizada para las peticiones
     const [gifUrl, setGifUrl] = useState(`https://api.giphy.com/v1/gifs/search?api_key=2RtGnE4bNqWnvp3LyrRdh4pmDKb3xlhd&q=${categorie}&limit=10`)
     const [stickerUrl, setStickerUrl] = useState(`https://api.giphy.com/v1/stickers/search?api_key=2RtGnE4bNqWnvp3LyrRdh4pmDKb3xlhd&q=${categorie}&limit=10`)
+    const [imgUrl, setImgUrl] = useState(`https://api.pexels.com/v1/search?query=${categorie}`)
+    
+    
     //objeto que conecta las rutas personalizadas por su tipo de categoria
     const [Url, setUrl] = useState({
-        gif: gifUrl,
-        img: stickerUrl,
-        sticker: stickerUrl
+        gif: {
+            link:gifUrl,
+            permission:false, //false or PASS
+            dataLoad:"data" //res -> respuesta // data.data //ingreso
+        },
+        img:{
+            link:imgUrl,
+            permission:"0R0e4H4fJRkrkVFvmAscQz6hnnZIjeKZktXASVLlZ34E69nypqK1J4tm", //false or PASS
+            dataLoad: false //res -> respuesta // data.data //ingreso
+        },
+        sticker: {
+            link:stickerUrl,
+            permission:false, //false or PASS
+            dataLoad:"data" //res -> respuesta // data.data //ingreso
+        }
       });
-    
+
+      /*const [MockTemplate, setMockTemple] = useState({
+        gifTemplate:{
+            img:"images.original.url",
+            type:"gif"
+        }
+      })
+    */
       
     useEffect(()=>{
         //realizara la peticion dependiendo del tipo de categoria enviada.
-        axios.get(Url[typeCategory]) 
+        
+        axios.get(Url[typeCategory].link,{
+            headers: {
+              Authorization: Url[typeCategory].permission ? `${Url[typeCategory].permission}`: undefined
+            }}) 
+            
             .then( res => {
-                if(listItem.length === 0){
-                    return setlistItem(res.data.data)
-                }
-                setlistItem(item => [...item, ...res.data.data])
+                const dataLoad = res.data[Url[typeCategory].dataLoad] || []; // Verificar si existe la propiedad
                 
+                
+                if(listItem.length === 0){
+                    return setlistItem(dataLoad)
+                }
+
+
+                setlistItem(item => [...item, ...dataLoad]);
             })
             .catch(error=>{
-                    Swal({
+                    new Swal({
                         icon:"warning",
                         title: "¡Ups! Hubo un error",
                         text:"Hubo un problema con el servidor, intentelo mas tarde.",
                     });
                 })
              //cuando la categoria cambie se aplicara nuevo el renderizado
-
         }
         ,[typeCategory])
 
