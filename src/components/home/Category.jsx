@@ -10,8 +10,12 @@ export default function Category({categorie, background, quitCategory, typeCateg
     const [stickerUrl, setStickerUrl] = useState(`https://api.giphy.com/v1/stickers/search?api_key=2RtGnE4bNqWnvp3LyrRdh4pmDKb3xlhd&q=${categorie}&limit=10`)
     const [imgUrl, setImgUrl] = useState(`https://api.pexels.com/v1/search?query=${categorie}`)
     
-    
+    //listado de favorito.
+
+    const [itemFavorite, setItemFavorite] = useState([])
     //objeto que conecta las rutas personalizadas por su tipo de categoria
+
+
     const [Url, setUrl] = useState({
         gif: {
             link:gifUrl,
@@ -21,7 +25,7 @@ export default function Category({categorie, background, quitCategory, typeCateg
         img:{
             link:imgUrl,
             permission:"0R0e4H4fJRkrkVFvmAscQz6hnnZIjeKZktXASVLlZ34E69nypqK1J4tm", //false or PASS
-            dataLoad: false //res -> respuesta // data.data //ingreso
+            dataLoad: "photos" //res -> respuesta // data.data //ingreso
         },
         sticker: {
             link:stickerUrl,
@@ -47,16 +51,12 @@ export default function Category({categorie, background, quitCategory, typeCateg
             }}) 
             
             .then( res => {
-                const dataLoad = res.data[Url[typeCategory].dataLoad] || []; // Verificar si existe la propiedad
-                
-                
-                if(listItem.length === 0){
-                    return setlistItem(dataLoad)
-                }
-
-
-                setlistItem(item => [...item, ...dataLoad]);
+                setlistItem([])
+                const dataLoad = res.data[Url[typeCategory].dataLoad] || res.data ; // Verificar si existe la propiedad
+                console.log(dataLoad);
+                setlistItem(dataLoad);
             })
+
             .catch(error=>{
                     new Swal({
                         icon:"warning",
@@ -71,6 +71,22 @@ export default function Category({categorie, background, quitCategory, typeCateg
     const onEliminar = ()=>{
         quitCategory(categorie)
     }
+
+
+    const addFavorito = (gif) => {
+        if(itemFavorite.includes(gif)){
+            //se elimina de favorito
+            const filterItem = itemFavorite.filter((item)=> item !== gif);
+            return setItemFavorite(filterItem)
+        }
+
+        //se agrega a favorito
+        setItemFavorite((item) => [gif, ...item]);
+    }
+
+    useEffect(() => {
+        console.log(itemFavorite);
+      }, [itemFavorite]);
 
 
     return(
@@ -90,15 +106,26 @@ export default function Category({categorie, background, quitCategory, typeCateg
             </button>
         </div>
         <div className="flex flex-wrap pt-[30px]">
+            {/*Template - data*/}
             { 
             listItem.map((gif, index) => (
-                <div key={index} className="w-[200px] h-[200px] m-2">
-                <p className="absolute bg-gray-800  m-[2px] text-[#fff] rounded-full px-3 uppercase">
-                    {gif.type}
-                </p>
-                <img src={gif.images.original.url} className="w-full h-full object-cover rounded-lg" />
-                </div>
+                <button key={index} onClick={()=>addFavorito(gif)}>
+
+                    <div className="w-[200px] h-[200px] m-2">
+                    <p className="absolute bg-gray-800  m-[2px] text-[#fff] rounded-full px-3 uppercase">
+                        {gif.type ? `${gif.type}`:"img"}
+                    </p>
+                    <img src={gif?.images?.original?.url || gif?.src?.medium} className={`w-full h-full object-cover rounded-lg`}
+                    
+                    style={{
+                        boxShadow: itemFavorite.includes(gif) ? 'rgba(63, 64, 249, 0.4) 0px 5px' : 'none'
+                    }} 
+                    
+                    />
+                    </div>
+                </button>
             ))}
+
         </div>
      </div> 
     )

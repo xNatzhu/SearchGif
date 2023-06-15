@@ -8,26 +8,19 @@ export default function Home() {
 
   
   const addCategory = (category) => {
-
-    //si la categoria existe en el estado no la agrega de lo contrario si.
-    if(categories.includes(category))return;
-
     //guarda el valor recibido de buscador, y lo añade al estado de categorias.
-
-    setCategories((prevCategory)=>[...prevCategory, category]);
+    setCategories([]);
+    setCategories(category);
 
   }
   
   const type = (type)=>{
     setTypeCategory(type)
-    console.log("estado 1", typeCategory);
+    console.log(typeCategory);
   } 
 
-  const quitCategory =(category)=>{
-    //recibe el valor del nombre unico y luego lo filtra creando un nuevo listado
-    const listQuitCategory = categories.filter((item)=> item !== category)
-    //actualiza el estado
-    setCategories(listQuitCategory)
+  const quitCategory =()=>{
+    setCategories([])
   }
 
   return (
@@ -49,17 +42,18 @@ export default function Home() {
           </div>
         </div>
         <div>
-          {
-            categories.length === 0 ?
-            <SeccionHome/>
-            :
-          categories.map((categorie, index) => {
-            const bgColor = index % 2 === 0 ? 'bg-[#ffffff]' : 'bg-[#f6f5f3]';
-            return(
-               
-                <Category key={categorie} categorie={categorie} quitCategory={quitCategory} typeCategory={typeCategory} background={bgColor}/>
-            )
-          })}
+
+        {categories.length === 0 ? (
+          <SeccionHome />
+        ) : (
+          <Category
+            key={categories}
+            categorie={categories}
+            quitCategory={quitCategory}
+            typeCategory={typeCategory}
+            background={"bg-[#ffffff]"}
+          />
+        )}
         </div>
     </>
   );

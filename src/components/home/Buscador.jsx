@@ -34,6 +34,7 @@ export default function Buscador(props) {
           value={optionTypeValue}
           >
           <option value="gif">Gif</option>
+          <option value="img">Img</option>
           <option value="sticker">Sticker</option>
         </select>
 
