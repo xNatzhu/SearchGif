@@ -1,5 +1,5 @@
 import { useState } from "react"; // import state
-
+import { NavLink} from "react-router-dom";
 export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
 
@@ -38,28 +38,58 @@ export default function Header() {
               </svg>
             </div>
             <ul className="MENU-LINK-MOBILE-OPEN flex flex-col items-center justify-between min-h-[250px]">
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <a href="/about">Inicio</a>
-              </li>
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <a href="/portfolio">Favorito</a>
-              </li>
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <a href="/contact">Portafolio</a>
-              </li>
+              <li>
+                <NavLink
+                    className="nav-link"
+                    activeClassName="active"
+                    to="/">
+                    Inicio
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className="nav-link"
+                    activeClassName="active"
+                    to="/favorito">
+                    Favorito
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className="nav-link"
+                    activeClassName="active"
+                    to="/Portafolio">
+                    Portafolio
+                </NavLink>
+            </li>
             </ul>
           </div>
         </section>
 
         <ul className="DESKTOP-MENU hidden space-x-8 lg:flex">
           <li>
-            <a href="/about">Inicio</a>
+              <NavLink
+                  className="nav-link"
+                  activeClassName="active"
+                  to="/">
+                  Inicio
+              </NavLink>
           </li>
           <li>
-            <a href="/portfolio">Favorito</a>
+              <NavLink
+                  className="nav-link"
+                  activeClassName="active"
+                  to="/favorito">
+                  Favorito
+              </NavLink>
           </li>
           <li>
-            <a href="/contact">Portafolio</a>
+              <NavLink
+                  className="nav-link"
+                  activeClassName="active"
+                  to="/Portafolio">
+                  Portafolio
+              </NavLink>
           </li>
         </ul>
       </nav>
