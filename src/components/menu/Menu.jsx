@@ -4,7 +4,7 @@ export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
 
   return (
-    <div className="flex items-center justify-between border-b border-gray-400 py-8">
+    <div className="flex items-center justify-between border-b border-gray-400 py-8 px-[50px] uppercase">
       <a href="/">
         GIFSEARCH
       </a>

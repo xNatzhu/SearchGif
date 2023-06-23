@@ -2,6 +2,7 @@
 body {
   scrollbar-width: none; /* Para Firefox */
   -ms-overflow-style: none; /* Para Internet Explorer y Edge */
+  background-color: #EDF2F7;
 }
 
 /* Estilo de la barra de desplazamiento horizontal */
@@ -23,6 +24,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 /* Cambiar la dirección de la barra de desplazamiento */
 body {
+
   overflow-y: scroll;
   overflow-x: scroll;
   writing-mode: horizontal-tb;
@@ -37,3 +39,8 @@ select {
     -webkit-appearance: none; /* Para Safari y Chrome */
 
   }
+
+.active{
+  color: #3F51B5;
+  font-weight: 500;
+}

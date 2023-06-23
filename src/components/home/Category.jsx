@@ -12,7 +12,8 @@ export default function Category({categorie, background, quitCategory, typeCateg
     
     //listado de favorito.
 
-    const [itemFavorite, setItemFavorite] = useState([])
+    const [itemFavorite, setItemFavorite] = useState(JSON.parse(localStorage.getItem("fav")) || []);
+
     //objeto que conecta las rutas personalizadas por su tipo de categoria
 
 
@@ -74,16 +75,20 @@ export default function Category({categorie, background, quitCategory, typeCateg
 
 
     const addFavorito = (gif) => {
-        if(itemFavorite.includes(gif)){
-            //se elimina de favorito
-            const filterItem = itemFavorite.filter((item)=> item !== gif);
-            return setItemFavorite(filterItem)
+        if (itemFavorite.includes(gif)) {
+            // Se elimina de favorito
+            const filterItem = itemFavorite.filter((item) => item !== gif);
+            localStorage.setItem("fav", JSON.stringify(filterItem));
+            setItemFavorite(filterItem);
+        } else {
+            // Se agrega a favorito
+            const updatedItemFavorite = [gif, ...itemFavorite];
+            localStorage.setItem("fav", JSON.stringify(updatedItemFavorite));
+            setItemFavorite(updatedItemFavorite);
         }
 
-        //se agrega a favorito
-        setItemFavorite((item) => [gif, ...item]);
-    }
-
+        console.log(localStorage.getItem("fav"));
+    };
     useEffect(() => {
         console.log(itemFavorite);
       }, [itemFavorite]);
