@@ -20,10 +20,15 @@ export default function Favorito(){
     };
 
     return(
-        <div className="flex flex-wrap  bg-gray-200 pt-[30px]">
-
+        <div className="sm:px-[100px] p-[10px]">
+        <div className="h-1 bg-gray-50 rounded overflow-hidden mt-[20px]">
+            <div className="w-24 h-full bg-indigo-500"></div>
+        </div>
+        <h2 className="uppercase text-[35px] text-gray-500 font-bold">Favorito</h2>
+        <div className="flex flex-wrap   pt-[30px]">
         {/*Template - data*/}
         {itemFavorite.length > 0 ? (
+          
             itemFavorite.map((gif, index) => (
                 <button key={index} onClick={() => addFavorito(gif)}>
                 <div className="w-[200px] h-[200px] m-2">
@@ -61,6 +66,7 @@ export default function Favorito(){
 </div>
             )}
 
+    </div>
     </div>
     );
 }
